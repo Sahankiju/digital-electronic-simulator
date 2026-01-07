@@ -18,6 +18,7 @@ class Wire(WireManager):
         self.output_gate=output_gate
         self.pin=pin
         self.changeInput(self.pin,self.output_gate.output)
+        self.output_gate.wire_id=self.wireID
         super().__init__(self)
 
     def outputChanged(self):
@@ -26,5 +27,7 @@ class Wire(WireManager):
     def changeInput(self,pin,value:int):
         if(pin=="A"):
             self.input_gate.inputA=value
+            self.outputChanged()
         if(pin=="B"):
             self.input_gate.inputB=value
+            self.outputChanged()

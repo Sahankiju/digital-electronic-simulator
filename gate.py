@@ -1,3 +1,5 @@
+
+import wiremanager as WM
 class Gate():
     def __init__(self,inputA: int,inputB: int):
         self.inputA=inputA
@@ -8,6 +10,7 @@ class Gate():
         self.inputB_connected = False
         self.inputA_connected_with = None
         self.inputB_connected_with = None
+        self.wire_id=None
         self.evaluate()
     def evaluate(self):
         pass
@@ -30,6 +33,9 @@ class AND(Gate):
        
     def evaluate(self):
         self.output=self.inputA and self.inputB
+        # if(temp_output != self.output):
+        #     WM.wires[self.wire_id]
+            
         
 
 class OR(Gate):
