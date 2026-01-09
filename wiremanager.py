@@ -1,17 +1,18 @@
-import gate as G
+import registry as RE
 
 class WireManager:
-    wires={}
+
     def __init__(self,wire):
-        WireManager.wires[wire.wireID]=wire
+        RE.wires[wire.wireID]=wire
     def delWire(self,wireID):
-        WireManager.pop(wireID)
+        RE.wires[wireID].output_gate.connected=False
+        RE.pop(wireID)
 
 
 
 class Wire(WireManager):
     count=0
-    def __init__(self,output_gate:G.Gate,input_gate: G.Gate,pin):
+    def __init__(self,output_gate,input_gate,pin):
         Wire.count+=1
         self.wireID=Wire.count
         self.input_gate=input_gate
@@ -19,6 +20,7 @@ class Wire(WireManager):
         self.pin=pin
         self.changeInput(self.pin,self.output_gate.output)
         self.output_gate.wire_id=self.wireID
+        self.output_gate.connected=True
         super().__init__(self)
 
     def outputChanged(self):
